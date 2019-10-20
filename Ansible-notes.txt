@@ -191,9 +191,54 @@ Mohnish 13.234.118.72   13.233.148.129
 Soujanya    15.206.82.13    52.66.197.25
 Nahesh      52.66.197.25    15.206.82.13
 
+===================
+inventory - a file which has list of IP address   + groups
+
+ansible all -i inventory -m yum -a"name=httpd state=present" -u ec2-user --key-file=rajesh-mumbai.pem -b
+
+ansible all -i inventory -m file -a"name=index.html state=touch" -u ec2-user --key-file=rajesh-mumbai.pem -b 
+
+ansible all -i inventory -m lineinfile -a'path=index.html state=present line="<h1> Welcome all to DevOpsSchol.com</h1>"' -u ec2-user --key-file=rajesh-mumbai.pem -b
+
+ansible all -i inventory -m copy -a"dest=/var/www/html/index.html src=index.html" -u ec2-user --key-file=rajesh-mumbai.pem -b
+
+ansible all -i inventory -m service -a"name=httpd state=started" -u ec2-user --key-file=rajesh-mumbai.pem -b
+
+=================================================================
+Playbook
+-------------------
+    Collection of PLAY(S)
+------------------
+What is Play?
+    Collection of module aka tasks
+    host group name
+    ++++
 
 
+---
+- name: This sets up an httpd webserver
+  hosts: web
+  vars:
+    myname: "rajesh kumar from Playbook"
+    package: "httpd"
+    service: "httpd"
 
+  tasks:
+  - name: Install the httpd apps
+    yum: name={{ service }}
+  - name: start the httpd service
+    service: name={{ package }} state=started
+  - name: create a empty fle
+    file: dest=/opt/test.txt state=touch
+  - name: copy a file
+    copy: dest=/var/www/html/ src="/home/ec2-user/index.html"
+  - name: Ansible prompt example.
+    debug:
+      msg: "{{ myname }}"
+
+...
+
+ansible-playbook  -i inventory web.yaml -u ec2-user --key-file=rajesh-mumbai.pem -b
 
 Step 3 - TOO MANY ADHOC COMMANDS -- USE PLAYBOOK in LOCAL
 
