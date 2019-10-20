@@ -1,0 +1,32 @@
+download putty or mobaxterm 
+create a pem file
+open putty using pem file
+goto: https://www.devopsschool.com/blog/how-to-install-ansible-in-centos-7-rhel-7/
+
+run commands to install ansible
+
+$ sudo yum install wget -y
+$ wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+$ yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+$ sudo rpm -i epel-release-latest-7.noarch.rpm
+$ sudo yum install ansible -y
+
+RUN ANSIBLE IN LOCALHOST
+
+ansible localhost -m yum -a"name=httpd state=present"
+ ansible localhost -m file -a"name=index.html state=touch"
+ ansible localhost -m lineinfile -a'path=index.html state=present line="<h1> Welcome to DevOpsSchol.com</h1>"'
+  ansible localhost -m copy -a"dest=/var/www/html/index.html src=index.html"
+   ansible localhost -m service -a"name=httpd state=started"
+
+RUN ANSIBLE IN REMOTE
+
+TO RUN PEM FILE INTO THE SERVER RUN:
+ wget https://www.devopsschool.com/notes/docker/2019/rajesh-mumbai.pem
+
+ansible all -i 52.66.197.25, -m yum -a"name=httpd state=present" -u ec2-user --key-file=rajesh-mumbai.pem -b
+  chmod 600 rajesh-mumbai.pem (COMMAND TO GET PERMISSION)
+  ansible all -i 52.66.197.25, -m file -a"name=index.html state=touch" -u ec2-user --key-file=rajesh-mumbai.pem -b
+  ansible all -i 52.66.197.25, -m lineinfile -a'path=index.html state=present line="<h1> Welcome all to DevOpsSchol.com</h1>"' -u ec2-user --key-file=rajesh-mumbai.pem -b
+  ansible all -i 52.66.197.25, -m copy -a"dest=/var/www/html/index.html src=index.html" -u ec2-user --key-file=rajesh-mumbai.pem -b
+  ansible all -i 52.66.197.25, -m service -a"name=httpd state=started" -u ec2-user --key-file=rajesh-mumbai.pem -b
