@@ -121,3 +121,26 @@ PLAY RECAP *********************************************************************
 15.206.82.13               : ok=6    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 52.66.197.25               : ok=6    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 
+
+WHAT IS DEVOPS
+================
+https://www.youtube.com/watch?v=-VaVmb_UOC8
+
+Slides
+http://devopsschool.com/slides/ansible
+Videos
+https://devopsschool.com/lms
+Quiz
+https://devopsschool.com/lms
+PDf 
+https://www.devopsschool.com/pdf/ansible/
+Notes
+https://www.devopsschool.com/notes
+Sample Program
+https://github.com/orgs/devopsschool-sample-projects/dashboard
+https://github.com/devops-school
+Tutorials
+https://devopsschool.com/tutorial/ansible/
+Blog
+https://www.devopsschool.com/blog/category/ansible/
+
